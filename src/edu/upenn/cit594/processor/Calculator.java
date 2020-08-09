@@ -2,11 +2,8 @@ package edu.upenn.cit594.processor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import edu.upenn.cit594.data.*;
 
 public class Calculator {
@@ -20,30 +17,97 @@ public class Calculator {
 	}
 	
 	// function executes if user enters 2
+	// Does not print truncated number correctly
 	public void getTotalFinesPerCapita(List<Ticket> tickets, List<Population> pops) {
-		Set<String> allZipCodes = new HashSet<String>();
+		Map<String, Integer> allZipCodesPop = new HashMap<String, Integer>();
 		for(Population pop: pops) {
-			allZipCodes.add(pop.getZipCode());
+			allZipCodesPop.put(pop.getZipCode(), pop.getSize());
 		}
-		Map<String, Double> totalFinesPerCapita = new HashMap<String, Double>();
+		
+		Map<String, Double> totalFinesPerZipCode = new HashMap<String, Double>();
 		for(Ticket ticket: tickets) {
 			String currZipCode = ticket.getZipCode();
-			if(!allZipCodes.contains(currZipCode) || 
+			if(!allZipCodesPop.containsKey(currZipCode) || 
 			   ticket.getState().trim().compareToIgnoreCase("PA") != 0){
 				continue;
 			}
 			
-			if(totalFinesPerCapita.containsKey(currZipCode)) {
-				totalFinesPerCapita.put(currZipCode, totalFinesPerCapita.get(currZipCode) + ticket.getFine());
+			if(totalFinesPerZipCode.containsKey(currZipCode)) {
+				totalFinesPerZipCode.put(currZipCode, totalFinesPerZipCode.get(currZipCode) + ticket.getFine());
 			}else {
-				totalFinesPerCapita.put(currZipCode, ticket.getFine());
+				totalFinesPerZipCode.put(currZipCode, ticket.getFine());
 			}
+		}
+		
+		Map<String, Double> totalFinesPerCapita = new HashMap<String, Double>();
+		for(String zipCode: totalFinesPerZipCode.keySet()) {
+			totalFinesPerCapita.put(zipCode, totalFinesPerZipCode.get(zipCode) / allZipCodesPop.get(zipCode));
 		}
 		
 		List<String> zipCodesWithFines = new ArrayList<String> (totalFinesPerCapita.keySet());
 		Collections.sort(zipCodesWithFines);
 		for(String zipCode: zipCodesWithFines) {
-			System.out.println(zipCode + " " + totalFinesPerCapita.get(zipCode));
+			System.out.println(zipCode + " " + String.format("%.4f", totalFinesPerCapita.get(zipCode)));
 		}
 	}
+	
+	// helper function
+	public void getAverageValue(List<Property> properties, String targetZipCode, AttributeValueGetter getter) {
+		int count = 0;
+		double value = 0.0;
+		for(Property property: properties) {
+			if(property.getZipCode().compareTo(targetZipCode) == 0) {
+				count += 1;
+				value += getter.getAttributeValue(property);
+			}
+		}
+		if(count == 0) {
+			System.out.println(0);
+		}else {
+			System.out.println((int) (value / count));
+		}
+	}
+	
+	// function executes if user enters 3
+	public void getAverageMarketValue(List<Property> properties, String targetZipCode) {
+		getAverageValue(properties, targetZipCode, new MarketValueGetter());
+	}
+	
+	// function executes if user enters 4
+	public void getAverageTotalLivableArea(List<Property> properties, String targetZipCode) {
+		getAverageValue(properties, targetZipCode, new TotalLivableAreaGetter());
+	}
+	
+	// function executes if user enters 5
+	public void getTotalResidentialMarketValuePerCapita(List<Property> properties, List<Population> pops, String targetZipCode) {
+		Map<String, Integer> allZipCodesPop = new HashMap<String, Integer>();
+		for(Population pop: pops) {
+			allZipCodesPop.put(pop.getZipCode(), pop.getSize());
+		}
+		
+		if(!allZipCodesPop.containsKey(targetZipCode) || allZipCodesPop.get(targetZipCode) == 0) {
+			System.out.println(0);
+		}
+		
+		double totalValue = 0.0;
+		for(Property property: properties) {
+			if(property.getZipCode().compareTo(targetZipCode) == 0) {
+				totalValue += property.getMarketValue();
+			}
+		}
+		
+		System.out.println((int) (totalValue / allZipCodesPop.get(targetZipCode)));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
