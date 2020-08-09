@@ -99,15 +99,30 @@ public class Calculator {
 		System.out.println((int) (totalValue / allZipCodesPop.get(targetZipCode)));
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 *  function executes if user enters 6
+	 *  Intent: for the ZIP code with most parking tickets, what is the average market value
+	 *  of its properties ?
+	 */
+	public void getAverageMarketValueForAreaWithMostTickets(List<Ticket> tickets, List<Property> properties) {
+		Map<String, Integer> allZipCodesTickets = new HashMap<String, Integer>();
+		for(Ticket ticket: tickets) {
+			String currZipCode = ticket.getZipCode();
+			if(allZipCodesTickets.containsKey(currZipCode)) {
+				allZipCodesTickets.put(currZipCode, allZipCodesTickets.get(currZipCode) + 1);
+			}else {
+				allZipCodesTickets.put(currZipCode, 1);
+			}
+		}
+		
+		String currZipCodeWithMaxTickets = "";
+		int currMaxCount = 0;
+		for(String zipCode: allZipCodesTickets.keySet()) {
+			if(allZipCodesTickets.get(zipCode) > currMaxCount) {
+				currZipCodeWithMaxTickets = zipCode;
+				currMaxCount = allZipCodesTickets.get(zipCode);
+			}
+		}	
+		getAverageTotalLivableArea(properties, currZipCodeWithMaxTickets);
+	}
 }
