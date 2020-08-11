@@ -2,7 +2,6 @@ package edu.upenn.cit594.datamanagement;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class ParkingReaderJSON implements ParkingReader {
     protected String filename;
 
     public ParkingReaderJSON(String fileName) {
-        return;
+        this.filename = fileName;
     }
 
     @Override

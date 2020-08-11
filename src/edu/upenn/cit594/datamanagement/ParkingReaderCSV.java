@@ -13,7 +13,7 @@ public class ParkingReaderCSV implements ParkingReader {
     protected String filename;
 
     public ParkingReaderCSV(String fileName) {
-        return;
+        this.filename = fileName;
     }
 
     @Override
