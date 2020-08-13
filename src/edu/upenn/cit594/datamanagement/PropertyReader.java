@@ -44,15 +44,38 @@ public class PropertyReader {
 
                 }
             }
-
+            
+            List<String> rowArray = new ArrayList<String>();
+            int begin = 0;
+            boolean flagQuotes = false;
+         
+            // Act as a parser to parse the one with double quote separtely.
+            
             while ((line = br.readLine()) != null) {
+                for(int i = 0; i < line.length(); i++) {
+                    if(line.charAt(i) == '\"') {
+                        flagQuotes = !flagQuotes;
+                    }
+                    boolean atLastPosition = (i == line.length()-1);
+                    if(atLastPosition) {
+                        rowArray.add(line.substring(begin));
+                        
+                    }
+                    else if(line.charAt(i) == ',' && !flagQuotes) {
+                        rowArray.add(line.substring(begin,i));
+                        begin = i+1;
+                        
+                    }
+                    
+                    
+                }
                 // process the line.
-                String[] ticketIdentity = line.split(",");
+              
 
-                Double total_livable_area = Double.parseDouble(ticketIdentity[total_livable_areaLocation].trim());
-                Double market_value = Double.parseDouble(ticketIdentity[market_valueLocation]);
+                Double total_livable_area = Double.parseDouble(rowArray.get(total_livable_areaLocation).trim());
+                Double market_value = Double.parseDouble(rowArray.get(market_valueLocation).trim());
 
-                String zip_code = ticketIdentity[zip_codeLocation].trim().substring(0, 5);// take only first five digit
+                String zip_code = rowArray.get(zip_codeLocation).trim().substring(0, 5);// take only first five digit
                                                                                           // as zipcode
                 propertyData.add(new Property(zip_code, market_value, total_livable_area));
 
@@ -66,6 +89,8 @@ public class PropertyReader {
             e.printStackTrace();
         }
         return propertyData;
+        
+        
 
     }
 }
