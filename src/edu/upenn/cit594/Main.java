@@ -1,17 +1,17 @@
 package edu.upenn.cit594;
 
-<<<<<<< HEAD
+import edu.upenn.cit594.datamanagement.ParkingReader;
+import edu.upenn.cit594.datamanagement.ParkingReaderCSV;
+import edu.upenn.cit594.datamanagement.ParkingReaderJSON;
+import edu.upenn.cit594.datamanagement.PopulationReader;
+import edu.upenn.cit594.datamanagement.PropertyReader;
+import edu.upenn.cit594.processor.Processor;
+import edu.upenn.cit594.ui.UserInterface;
+
 public class Main {
     
     public static String logfileName; // used to pass in log file name.
-=======
-import edu.upenn.cit594.datamanagement.*;
-import edu.upenn.cit594.logging.Logger;
-import edu.upenn.cit594.processor.Processor;
-import edu.upenn.cit594.ui.UserInterface;
->>>>>>> 2b16176d0bee004625737acc434e76b821ed7c6e
 
-public class Main {
 	public static void main(String[] args) {
 		/***
 		 * Check validity of input
