@@ -1,20 +1,20 @@
 package edu.upenn.cit594.data;
 
 public class Ticket {
-	private int ticketNumber;
+	private String ticketNumber;
 	private String plateID;
 	private String date;
 	private String zipCode;
 	private String violation;
-	private double fine;
+	private String fine;
 	private String state;
 	
-	public Ticket(int ticketNumber, 
+	public Ticket(String ticketNumber, 
 			      String plateID, 
 			      String date, 
 			      String zipCode, 
 			      String violation,
-			      double fine,
+			      String fine,
 			      String state) {
 		this.ticketNumber = ticketNumber;
 		this.plateID = plateID;
@@ -25,7 +25,13 @@ public class Ticket {
 		this.state = state;
 	}
 
-	public int getTicketNumber() {
+	@Override
+	public String toString() {
+		return this.getTicketNumber() + " " + this.getPlateID() + " " + this.getFine() + " " + this.getZipCode();
+	}
+	
+	
+	public String getTicketNumber() {
 		return ticketNumber;
 	}
 
@@ -45,7 +51,7 @@ public class Ticket {
 		return violation;
 	}
 
-	public double getFine() {
+	public String getFine() {
 		return fine;
 	}
 

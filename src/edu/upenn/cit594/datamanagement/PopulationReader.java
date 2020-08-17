@@ -11,14 +11,19 @@ import edu.upenn.cit594.data.Population;
 
 
 public class PopulationReader {
-    protected String filename;
+    protected String fileName;
+    
 	public PopulationReader(String fileName) {
-	    this.filename = fileName;
+	    this.fileName = fileName;
 	}
 	
+    public String getFileName() {
+    	return this.fileName;
+    }
+    
 	public List<Population> getAllPopulations(){
 	    List<Population> zipcodePop = new ArrayList<Population>();
-	        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+	        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 	            String line;
 
 	            while ((line = br.readLine()) != null) {
@@ -26,7 +31,7 @@ public class PopulationReader {
 	                String[] ticketIdentity = line.split("\\s+");
 
 	                String Zipcode =  ticketIdentity[0].trim();
-	                Integer Population = Integer.parseInt(ticketIdentity[1].trim());
+	                String Population = ticketIdentity[1].trim();
 	                
 
 	                zipcodePop.add(new Population(Zipcode, Population));
@@ -35,13 +40,14 @@ public class PopulationReader {
 	            return zipcodePop;
 	        } catch (FileNotFoundException e) {
 	            // TODO Auto-generated catch block
+	        	System.out.println("File not found !");
 	            e.printStackTrace();
 	        } catch (IOException e) {
 	            // TODO Auto-generated catch block
+	        	System.out.println("File cannot be openned !");
 	            e.printStackTrace();
 	        }
 	        return zipcodePop;
 
 	    }
 	}
-

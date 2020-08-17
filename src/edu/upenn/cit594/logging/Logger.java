@@ -3,7 +3,7 @@ package edu.upenn.cit594.logging;
 import edu.upenn.cit594.Main;
 
 import java.io.File;
-import java.io.PrintWriter;
+import java.io.FileOutputStream;
 
 /**
  * Implement singleton design to create logger class . To log message to log
@@ -21,9 +21,9 @@ public class Logger {
      * 
      * @param filename String
      */
-    private Logger(String filename) {
+    private Logger(String fileName) {
         try {
-            out = new PrintWriter(new File(filename));
+            out = new PrintWriter(new FileOutputStream(new File(fileName),true));
         } catch (Exception e) {
 
         }
@@ -39,8 +39,9 @@ public class Logger {
      * @param msg String
      */
     public void log(String msg) {
-        out.println(msg);
+        out.append(msg + "\n");
         out.flush();
     }
 
 }
+

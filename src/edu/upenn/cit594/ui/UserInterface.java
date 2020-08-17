@@ -28,40 +28,47 @@ public class UserInterface {
             try {
             	int a = Integer.parseInt(s);
             	if(a == 0) {
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
+            		cond = false;
             		System.exit(0);
             	}else if(a == 1) {
-            		calculator.getTotalPopulation(processor.getPopulationReader().getAllPopulations());
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
+            		calculator.getOutput1(processor.getPopulations());
             	}else if(a == 2) {
-            		calculator.getTotalFinesPerCapita(processor.getParkingReader().getAllTickets(),
-            				                          processor.getPopulationReader().getAllPopulations());
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
+            		calculator.getOutput2(processor.getTickets(),
+              				              processor.getPopulations());
             	}else if(a == 3) {
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
             		System.out.println("Please enter a ZIP code:");
             		String zipCode = in.nextLine();
-            		calculator.getAverageMarketValue(processor.getPropertyReader().getAllProperties(), zipCode);
+            		processor.getLogger().log(System.currentTimeMillis() + " " + zipCode);
+            		calculator.getOutput3(processor.getProperties(), zipCode);
             	}else if(a == 4) {
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
             		System.out.println("Please enter a ZIP code:");
             		String zipCode = in.nextLine();
-            		calculator.getAverageTotalLivableArea(processor.getPropertyReader().getAllProperties(), zipCode);
+            		processor.getLogger().log(System.currentTimeMillis() + " " + zipCode);
+            		calculator.getOutput4(processor.getProperties(), zipCode);
             	}else if(a == 5) {
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
             		System.out.println("Please enter a ZIP code:");
             		String zipCode = in.nextLine();
-        		calculator.getTotalResidentialMarketValuePerCapita(processor.getPropertyReader().getAllProperties(), 
-        				                                           processor.getPopulationReader().getAllPopulations(),
+            		processor.getLogger().log(System.currentTimeMillis() + " " + zipCode);
+            		calculator.getOutput5(processor.getProperties(), processor.getPopulations(),
         				                                           zipCode);
             	}else if(a == 6) {
-            		calculator.getAverageMarketValueForAreaWithMostTickets(processor.getParkingReader().getAllTickets(), 
-            				                                               processor.getPropertyReader().getAllProperties());
+            		processor.getLogger().log(System.currentTimeMillis() + " " + s);
+            		calculator.getOutput6(processor.getTickets(), processor.getProperties());
             	}else {
             		System.out.println("Number is not between 0 and 6 !");
             		continue;
             	}
             }catch(Exception e) {
-            	System.out.println("Wrong format !");
+            	System.out.println("Wrong input format !");
             	continue;
             }
         }
-        
-
 	}
 	
 	
