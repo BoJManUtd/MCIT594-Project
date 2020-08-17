@@ -5,11 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.upenn.cit594.data.Property;
-import edu.upenn.cit594.data.Ticket;
 
 public class PropertyReader {
     protected String fileName;

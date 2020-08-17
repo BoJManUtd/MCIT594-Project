@@ -30,8 +30,7 @@ public class ParkingReaderJSON implements ParkingReader {
     public List<Ticket> getAllTickets() {
         JSONParser parser = new JSONParser();
         List<Ticket> ticketData = new ArrayList<Ticket>();
-        int count = 0;
-		try {
+        try {
 			JSONArray JSONTickets = (JSONArray) parser.parse(new FileReader(this.fileName));
 			@SuppressWarnings("rawtypes")
 			Iterator iter = JSONTickets.iterator();

@@ -1,10 +1,7 @@
 package edu.upenn.cit594.ui;
 
-import java.util.List;
 import java.util.Scanner;
 
-import edu.upenn.cit594.data.Property;
-import edu.upenn.cit594.data.Ticket;
 import edu.upenn.cit594.processor.Calculator;
 import edu.upenn.cit594.processor.Processor;
 
@@ -19,7 +16,8 @@ public class UserInterface {
 	
 	
 	public void start() {
-        Scanner in = new Scanner(System.in); 
+        @SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in); 
         boolean cond = true;
         
         while(cond) {
