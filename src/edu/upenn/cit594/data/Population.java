@@ -2,9 +2,9 @@ package edu.upenn.cit594.data;
 
 public class Population {
 	private String zipCode;
-	private int size;
+	private String size;
 	
-	public Population(String zipCode, int size) {
+	public Population(String zipCode, String size) {
 		this.zipCode = zipCode;
 		this.size = size;
 	}
@@ -13,7 +13,7 @@ public class Population {
 		return zipCode;
 	}
 
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 	
