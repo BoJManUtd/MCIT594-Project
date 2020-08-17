@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
 import edu.upenn.cit594.data.Ticket;
 
 public class ParkingReaderJSON implements ParkingReader {
@@ -27,7 +28,6 @@ public class ParkingReaderJSON implements ParkingReader {
 
     @Override
     public List<Ticket> getAllTickets() {
-
         JSONParser parser = new JSONParser();
         List<Ticket> ticketData = new ArrayList<Ticket>();
         int count = 0;

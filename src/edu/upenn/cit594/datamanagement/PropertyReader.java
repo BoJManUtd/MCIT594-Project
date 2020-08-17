@@ -99,6 +99,7 @@ public class PropertyReader {
    
             while ((line = br.readLine()) != null) {
             	propertyData.add(getPropertyFromLine(line));
+
             }
             return propertyData;
         } catch (FileNotFoundException e) {

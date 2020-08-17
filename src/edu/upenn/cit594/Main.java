@@ -10,7 +10,6 @@ import edu.upenn.cit594.ui.UserInterface;
 
 public class Main {
 	public static String logfileName; // used to pass in log file name.
-	
 	public static void main(String[] args) {
 		
 		if(args.length != 5) {

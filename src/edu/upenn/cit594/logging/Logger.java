@@ -4,7 +4,6 @@ import edu.upenn.cit594.Main;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
 
 /**
  * Implement singleton design to create logger class . To log message to log
@@ -45,3 +44,4 @@ public class Logger {
     }
 
 }
+
